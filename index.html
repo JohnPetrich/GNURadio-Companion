@@ -34,7 +34,54 @@
           <h1>
 <a name="gnuradio-companion" class="anchor" href="#gnuradio-companion"><span class="octicon octicon-link"></span></a>GNURadio-Companion</h1>
 
-<p>A collection of "how to" documents and .grc files to assist the new GNURadio Companion user</p>
+<p>To execute and study the DSP flow graphs contained on this github site, it is necessary to install a version of GNURadio Companion on your computer.  Below is a trouble free method to do that installation.  Computer requirements are a multi-core CPU, 2 GHz or above clock speed, and 4 MB of memory.  More information regarding the entire GNURadio Companion project is available at the project website:  <a href="http://gnuradio.org/redmine/projects/gnuradio">http://gnuradio.org/redmine/projects/gnuradio</a></p>
+
+<p><strong>GNU Radio Installation Procedure - Step by Step</strong>
+Tom McDermott, N5EG
+John Petrich, W7FU
+May 5, 2014</p>
+
+<p>The following procedure is recommended as one reliable method to install GRC3.7.3 and above into Ubuntu 14.04.  The procedure consists of five steps:</p>
+
+<p>1) Only if necessary, remove prior GRC installations and residuals.  This includes “distribution” versions downloaded via the Ubuntu Software Center, even if you have “removed” it via the Software Center.  Copy and paste the “Gnuradio_remove” script file into your Ubuntu Home directory. <a href="http://svn.tapr.org/filedetails.php?repname=OpenHPSDR+Main&amp;path=%2Ftrunk%2FN5EG%2FGRC3.7%2FGnuradio_remove">http://svn.tapr.org/filedetails.php?repname=OpenHPSDR+Main&amp;path=%2Ftrunk%2FN5EG%2FGRC3.7%2FGnuradio_remove</a>   This step is not necessary if you have not previously attempted to install GRC onto your hard drive.
+2) Copy and paste the latest available “build-gnuradio” script file provided by Marcus Leech <a href="http://sbrac.org/files/build-gnuradio%C2%A0into">http://sbrac.org/files/build-gnuradio into</a> the Ubuntu Home directory.
+3) Make sure that GCC is installed.
+4) Execute the build script file.
+5) Open the GRC application and check that the application is functional.</p>
+
+<p>Step 1:
+(Note: $ is the prompt character displayed by the terminal, don't type it yourself.)  Open the Terminal and at the “~$” prompt enter:</p>
+
+<p>$ sudo apt-get purge gnuradio (and Enter)</p>
+
+<p>Step 2: 
+1. Copy and paste the file “Gnuradio_remove” to your Home directory.  (You may need to copy and paste to your Desktop as an intermediate step then copy and paste to the Home directory)
+2. Open your Home directory in the graphical browser.
+3. Right click the file “Gnuradio_remove” and select “Properties”. A popup will open.
+4. Select the “Permissions” tab.
+5. Select the check-mark "Allow executing file as a program"
+6. Close the popup menu then close the Home directory.
+7. Open the Terminal. At the “~$” prompt enter
+~$ sudo ./Gnuradio_remove (and Enter) (this command instructs the OS to execute the remove script located in the Home directory)</p>
+
+<p>Step 3: 
+Determine if GCC (GNU Compiler Collection) is installed on your system.  Using the Terminal, at the “~$” prompt enter:</p>
+
+<p>~$ which gcc (and Enter)
+If the result is a directory listing such as: /usr/bin/gcc  ,then GCC is installed and no further action is necessary.
+If the result is a blank line, GCC is not installed, and it is necessary to install it for GRC to build. The package build-essential includes the compilers, linkers, make, and cmake. In the Terminal, at the “~$” prompt enter:</p>
+
+<p>~$ sudo apt-get install build-essential  ,or the alternative command: $ sudo apt-get --reinstall install build-essential (and Enter)</p>
+
+<p>Step 4: 
+Execute the build-gnuradio script from your Home directory. You need to first mark the script file as executable (similar to how the Gnuradio_remove script was marked in step 2).  In the Terminal “~$” prompt enter:</p>
+
+<p>~$ ./build-gnuradio –m (and Enter)  (this command instructs the OS to execute the build script located in the Home directory and get the latest version of GRC)</p>
+
+<p>(Note:  The build process can take a long time depending on the capabilities of your computer.  Computers at the i7 level require about 20 minutes to complete the build process.  Computers at the i3 level can take hours to complete the build and single core computers longer yet.  A number of “y” commands, for “yes”, are required in the Terminal during the initial stages of the build process, so pay attention.)</p>
+
+<p>Step 5: To open GRC, after the build is compete, open the Terminal, at “~$” enter
+~$ gnuradio-companion (Enter)</p>
         </section>
 
         <footer>
