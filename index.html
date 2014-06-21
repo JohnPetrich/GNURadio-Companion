@@ -32,9 +32,15 @@
 
         <section id="main_content">
           <h1>
-<a name="gnuradio-companion" class="anchor" href="#gnuradio-companion"><span class="octicon octicon-link"></span></a>GNURadio-Companion</h1>
+<a name="gnuradio-companion-grc" class="anchor" href="#gnuradio-companion-grc"><span class="octicon octicon-link"></span></a>GNURadio-Companion (GRC)</h1>
 
-<p>To execute and study the DSP flow graphs contained on this github site, it is necessary to install a version of GNURadio Companion on your computer.  Below is a trouble free method to do that installation.  Computer requirements are a multi-core CPU, 2 GHz or above clock speed, and 4 MB of memory.  More information regarding the entire GNURadio Companion project is available at the project website:  <a href="http://gnuradio.org/redmine/projects/gnuradio">http://gnuradio.org/redmine/projects/gnuradio</a></p>
+<p>What follows are three "step by step" guides relating to the installation and updating of GRC.</p>
+
+<p>To execute and study the DSP flow graphs contained on this github site, it is necessary to install a version of GNURadio Companion (GRC) on your computer.  Below is a trouble free method to do that installation:  <strong>GNU Radio Installation Procedure</strong>.  Computer requirements for GRC are a multi-core CPU, 2 GHz or above clock speed, and 4 MB of memory.  More information regarding the entire GRC project is available at the project website:  <a href="http://gnuradio.org/redmine/projects/gnuradio">http://gnuradio.org/redmine/projects/gnuradio</a></p>
+
+<p>GRC is in a constant state of development.  Once GRC is installed, the version can be updated using git.  The method to <strong>Update GRC versions using git</strong> is included below.</p>
+
+<p>New DSP blocks are developed out of the version "tree" and are termed "out of tree" (OOT) modules.  These OOT modules are added using <strong>GNURadio Block Installation Procedure.</strong></p>
 
 <p><strong>GNU Radio Installation Procedure - Step by Step</strong></p>
 
@@ -50,7 +56,7 @@ May 5, 2014</p>
 4) Execute the build script file.
 5) Open the GRC application and check that the application is functional.</p>
 
-<p><strong>Step 1</strong>:
+<p><strong>Step 1:</strong>
 (Note: $ is the prompt character displayed by the terminal, don't type it yourself.)  Open the Terminal and at the “~$” prompt enter:</p>
 
 <p>$ sudo apt-get purge gnuradio (and Enter)</p>
@@ -68,21 +74,94 @@ May 5, 2014</p>
 <p><strong>Step 3:</strong> 
 Determine if GCC (GNU Compiler Collection) is installed on your system.  Using the Terminal, at the “~$” prompt enter:</p>
 
-<p>~$ which gcc (and Enter)
+<p>~$ which gcc (Enter)
 If the result is a directory listing such as: /usr/bin/gcc  ,then GCC is installed and no further action is necessary.
 If the result is a blank line, GCC is not installed, and it is necessary to install it for GRC to build. The package build-essential includes the compilers, linkers, make, and cmake. In the Terminal, at the “~$” prompt enter:</p>
 
-<p>~$ sudo apt-get install build-essential  ,or the alternative command: $ sudo apt-get --reinstall install build-essential (and Enter)</p>
+<p>~$ sudo apt-get install build-essential  ,or the alternative command: $ sudo apt-get --reinstall install build-essential (Enter)</p>
 
 <p><strong>Step 4:</strong> 
 Execute the build-gnuradio script from your Home directory. You need to first mark the script file as executable (similar to how the Gnuradio_remove script was marked in step 2).  In the Terminal “~$” prompt enter:</p>
 
-<p>~$ ./build-gnuradio –m (and Enter)  (this command instructs the OS to execute the build script located in the Home directory and get the latest version of GRC)</p>
+<p>~$ ./build-gnuradio –m (Enter)  (this command instructs the OS to execute the build script located in the Home directory and get the latest version of GRC)</p>
 
 <p>(Note:  The build process can take a long time depending on the capabilities of your computer.  Computers at the i7 level require about 20 minutes to complete the build process.  Computers at the i3 level can take hours to complete the build and single core computers longer yet.  A number of “y” commands, for “yes”, are required in the Terminal during the initial stages of the build process, so pay attention.)</p>
 
 <p><strong>Step 5</strong>: To open GRC, after the build is compete, open the Terminal, at “~$” enter
 ~$ gnuradio-companion (Enter)</p>
+
+<p><strong>Update GRC versions using git</strong>
+John Petrich, W7FU
+May 8, 2014</p>
+
+<p>This procedure is one method to update your version of GRC.  The github function is the method of managing versions of GRC open source software.  In the open source world of GRC, changes are frequent.  The ability to update versions is important to keep abreast of the latest developments and bug fixes.  Scripted installation versions of GRC automatically incorporate this functionality.  Distribution versions may not and a reason to avoid distribution version installations of GRC. </p>
+
+<p>The updating of GRC via git involves 3 steps:</p>
+
+<p><strong>Step 1:</strong> 
+Use the Terminal and enter the following series of commands:
+$ cd gnuradio (Enter)</p>
+
+<p><strong>Step 2:</strong>
+$ git fetch origin (Enter)
+if there is no return, your version is current.  If there are returns there are new releases.</p>
+
+<p><strong>Step 3:</strong>
+$ git pull origin (Enter)
+The new source code will be pulled down from the git website and positioned for installation.</p>
+
+<p><strong>Step 4:</strong>
+To install the revised source code, enter in the Terminal:
+$ cd build (Enter)
+$ make ../ (Enter) [Note the space between “make” and “../”]
+$ make clean (Enter)
+$ make (Enter)
+$ sudo make install (Enter)
+$ sudo ldconfig (Enter)</p>
+
+<p>At this point your version of GRC is automatically updated using git.</p>
+
+<p><strong>GNU Radio DSP Block Installation Procedure</strong>
+Out-Of-Tree Module
+Tom McDermott, N5EG
+John Petrich, W7FU
+May 11, 2014</p>
+
+<p>To install additional DSP block types, not included in the official released version of GNU Radio (called 'out-of-tree') there are three steps:
+Step 1: Download and un-compress the source code file for the desired block into the home directory.  In this example we will demonstrate with the OOT module: gr-hpsdr.r.3227 Hermes NB block. Your home directory is usually identified as ~  and we want to un-compress the complete structure into a subdirectory of ~. That complete new block will include files and even deeper directories (for example, build files). Normally the un-compress program takes care of setting it all up for us. For example, you might create a new directory  ~/gr-hpsdr.r.3227  and unzip the code into it. In Linux, directory names can include the dot character.</p>
+
+<p>Step 2 Enter a series of commands in the Terminal that will compile and install the source code into the GNU Radio DSP library.  The commands are those that follow the “$” sign in this text, for example:
+~/ gr-hpsdr.r.3227/build/$ make</p>
+
+<p>Step 3: Open GRC and confirm the presence of the block(s) in the library.</p>
+
+<p><strong>Step 1:</strong><br>
+Create a new sub directory in the home directory.<br>
+    In the Terminal at “~$”enter:
+    ~$ mkdir gr-hpsdr.r.3227 (Enter)
+    ~$ cd gr-hpsdr.r.3227 (Enter)
+    ~/gr-hpsdr.r.3227$</p>
+
+<p><strong>Step 2:</strong> 
+Down load and un-compress using the graphical archive manager to extract the source code into the newly created directory.  Check the subdirectory to make sure that the un-compressed block files are present.
+        ~/gr-hpsdr.r.3227$ ls (Enter)
+A list of the files in your new directory will be listed, including the source directory for the block you are intending to install.  It should include some subdirectories, such as apps, build, cmake, python, etc. and the file CmakeLists.txt.</p>
+
+<p><strong>Step 3:</strong> 
+In the Terminal, at the “~$” prompt enter the following series of commands:
+    ~$ cd ~/ gr-hpsdr.r.3227
+        $ mkdir build
+        $ cd build
+        $ cmake ../  (Enter) 
+           [note the space after “cmake” and before “../”]
+    $ make clean (Enter)
+    $ make (Enter)
+    $ sudo make install (Enter)
+    $ sudo ldconfig (Enter)
+    $ exit (Enter) and the terminal will close.</p>
+
+<p><strong>Step 4:</strong><br>
+Open the GRC application and verify that the desired block is installed in the DSP library list. If you installed gr-hpsdr, for example, there would be a hpsdr selection on the panel with all the other DSP library categories.  Inside that hpsdr library category will be the hermesNB block. Other out-of-tree modules will have other names given to them by their authors.</p>
         </section>
 
         <footer>
